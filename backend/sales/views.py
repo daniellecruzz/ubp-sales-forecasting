@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
 from django.db.models import Sum
 from .models import Product, SalesRecord, Inventory
 from .serializers import ProductSerializer, SalesRecordSerializer, InventorySerializer
@@ -15,6 +16,14 @@ class SalesRecordViewSet(viewsets.ModelViewSet):
     serializer_class = SalesRecordSerializer
 
     def perform_create(self, serializer):
+        product = serializer.validated_data['product']
+        quantity = serializer.validated_data['quantity']
+        try:
+            inventory = Inventory.objects.get(product=product)
+            if inventory.quantity < quantity:
+                raise ValidationError({'error': 'Not enough stock available!'})
+        except Inventory.DoesNotExist:
+            pass
         sale = serializer.save()
         try:
             inventory = Inventory.objects.get(product=sale.product)
@@ -22,6 +31,15 @@ class SalesRecordViewSet(viewsets.ModelViewSet):
             inventory.save()
         except Inventory.DoesNotExist:
             pass
+
+    def perform_destroy(self, instance):
+        try:
+            inventory = Inventory.objects.get(product=instance.product)
+            inventory.quantity += instance.quantity
+            inventory.save()
+        except Inventory.DoesNotExist:
+            pass
+        instance.delete()
 
     @action(detail=False, methods=['get'])
     def summary(self, request):

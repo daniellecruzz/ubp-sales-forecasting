@@ -25,6 +25,17 @@ function Forecasting() {
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-gray-800">Sales Forecasting</h2>
 
+      {/* Helper text */}
+      <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex items-start gap-4">
+        <span className="text-2xl">📌</span>
+        <div className="text-sm text-gray-600 space-y-1">
+          <p className="font-semibold text-gray-800">Before Generating a Forecast</p>
+          <p>• Minimum of <span className="font-semibold text-orange-500">3 weeks</span> of sales data is required</p>
+          <p>• For best results, use <span className="font-semibold text-orange-500">8 or more weeks</span> of data</p>
+          <p>• Add sales records in the <span className="font-semibold text-orange-500">💰 Sales</span> page</p>
+        </div>
+      </div>
+
       {/* Controls */}
       <div className="bg-white rounded-xl p-6 shadow">
         <h3 className="text-lg font-semibold mb-4 text-gray-700">Forecast Settings</h3>

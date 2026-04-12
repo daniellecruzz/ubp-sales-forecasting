@@ -8,7 +8,7 @@ const links = [
   { path: '/forecasting', label: '📈 Forecasting' },
 ]
 
-function Sidebar() {
+function Sidebar({ onLogout }) {
   const location = useLocation()
 
   return (
@@ -34,8 +34,13 @@ function Sidebar() {
           </Link>
         ))}
       </nav>
-      <div className="p-4 border-t border-gray-700">
+      <div className="p-4 border-t border-gray-700 space-y-2">
         <p className="text-xs text-gray-500">Logged in as Admin</p>
+        <button
+          onClick={onLogout}
+          className="w-full bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm font-semibold transition-colors">
+          🚪 Logout
+        </button>
       </div>
     </div>
   )

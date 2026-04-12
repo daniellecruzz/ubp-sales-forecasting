@@ -32,7 +32,7 @@ def forecast(request):
     period = request.GET.get('period', 'weekly')
 
     df = get_sales_dataframe(period)
-    if df is None or len(df) < 4:
+    if df is None or len(df) < 3:
         return Response({'error': 'Not enough data'}, status=400)
 
     train = df[:-2]
@@ -88,7 +88,6 @@ def run_ets(train, test, period):
         chart_data.append({'date': str(row['date'].date()), 'actual': round(float(row['total_amount']), 2),
                           'forecast': round(float(predicted_test[i]), 2)})
     future_forecast = fit.forecast(periods)
-    last_date = df['date'].max() if period == 'weekly' else df['date'].max()
     freq = timedelta(weeks=1) if period == 'weekly' else timedelta(days=30)
     forecast_data = [{'date': str((test['date'].max() + freq * (i+1)).date()),
                      'forecast': round(float(v), 2)} for i, v in enumerate(future_forecast)]
