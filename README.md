@@ -7,14 +7,18 @@ A web-based management system for Ultimate Burger and Pizza with Sales Forecasti
 - **Database:** SQLite
 - **Forecasting:** Prophet, ETS, SARIMA
 
-## Setup Instructions
+## Live Demo
+- **Frontend:** https://ubp-sales-forecasting.vercel.app
+- **Backend API:** https://ubp-sales-forecasting.onrender.com/api
+
+## Setup Instructions (Local)
 
 ### Backend
 ```bash
 cd backend
 python3 -m venv venv
 source venv/bin/activate
-pip install django djangorestframework django-cors-headers statsmodels prophet scikit-learn pandas numpy
+pip install -r requirements.txt
 python3 manage.py migrate
 python3 manage.py runserver
 ```
@@ -26,7 +30,7 @@ npm install
 npm run dev
 ```
 
-## Access
+## Local Access
 - Frontend: http://localhost:5173
 - Backend API: http://127.0.0.1:8000/api
 - Admin: http://127.0.0.1:8000/admin
