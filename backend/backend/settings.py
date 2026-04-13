@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-z2h_35mh9o3p&1)g!%y(0ax*7lsv8p0csp54+eio!44q*bt5b9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'ubp-sales-forecasting.onrender.com']
 
 
 # Application definition
