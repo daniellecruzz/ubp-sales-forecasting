@@ -6,6 +6,7 @@ Django==6.0.4
 django-cors-headers==4.9.0
 djangorestframework==3.17.1
 fonttools==4.62.1
+gunicorn==25.3.0
 holidays==0.94
 importlib_resources==6.5.2
 joblib==1.5.3
