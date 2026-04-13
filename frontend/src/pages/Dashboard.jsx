@@ -61,6 +61,7 @@ function Dashboard() {
               <th className="pb-2">Category</th>
               <th className="pb-2">Price</th>
               <th className="pb-2">Stock</th>
+              <th className="pb-2">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -69,13 +70,14 @@ function Dashboard() {
                 <td className="py-3 font-medium">{p.name}</td>
                 <td className="py-3 text-gray-500">{p.category}</td>
                 <td className="py-3">₱{p.price}</td>
+                <td className="py-3">{p.stock} units</td>
                 <td className="py-3">
                   <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                    p.stock <= p.low_stock_threshold 
-                      ? 'bg-red-100 text-red-600' 
+                    p.stock <= p.low_stock_threshold
+                      ? 'bg-red-100 text-red-600'
                       : 'bg-green-100 text-green-600'
                   }`}>
-                    {p.stock} units
+                    {p.stock <= p.low_stock_threshold ? '⚠️ Low Stock' : '✅ In Stock'}
                   </span>
                 </td>
               </tr>
